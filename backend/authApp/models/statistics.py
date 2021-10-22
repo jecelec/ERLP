@@ -3,7 +3,7 @@ from .user     import User
 
 class historico(models.Model):
     id                    = models.AutoField(primary_key=True)
-    departamento          = models.CharField('departamento',     max_length = 56)
+    departamento          = models.CharField('departamento',  max_length = 56)
     municipio             = models.CharField('municipio',     max_length = 56)
     codigo_arl            = models.IntegerField(default=1423)
     year                  = models.IntegerField()

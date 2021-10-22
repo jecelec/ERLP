@@ -1,10 +1,8 @@
 from rest_framework                        import serializers
 from authApp.models.user                   import User
-"""from authApp.models.statistics             import historico"""
 from authApp.serializers                   import statisticsSerializer
 
 class UserSerializer(serializers.ModelSerializer):
-    """historico = statisticsSerializer()"""
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'name', 'email']

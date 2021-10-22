@@ -1,4 +1,4 @@
-# erlp_fe
+# bank_fe
 
 ## Project setup
 ```

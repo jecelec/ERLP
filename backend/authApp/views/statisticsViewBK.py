@@ -12,7 +12,7 @@ from authApp.serializers.statisticsSerializer  import StatisticsSerializer
 class CrearNuevoReporteView(generics.CreateAPIView):
     serializer_class = StatisticsSerializer
     permission_classes = (IsAuthenticated)
-    """queryset            = historico.objects.all()"""
+    queryset            = historico.objects.all()
 
     def post(self, request, *args, **kwargs):
         token        = request.META.get('HTTP_AUTHORIZATION')[7:]

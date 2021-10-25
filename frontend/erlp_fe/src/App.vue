@@ -107,7 +107,7 @@
     width: 100%;
     height: 10vh;
     min-height: 100px;
-    background-color: rgb(199, 134, 14) ;
+    background-color: #2c2825 ;
     color:#E5E7E9 ;
     display: flex;
     justify-content: space-between;
@@ -130,15 +130,15 @@
 
   .header nav button{
     color: #E5E7E9;
-    background: #283747;
+    background: #2c2825;
     border: 1px solid #E5E7E9;
     border-radius: 5px;
     padding: 10px 20px;
   }
 
   .header nav button:hover{
-    color: #283747;
-    background: #E5E7E9;
+    color: #E5E7E9;
+    background: #744806;
     border: 1px solid #E5E7E9;
   }
 
@@ -156,7 +156,7 @@
     width: 100%;
     height: 10vh;
     min-height: 100px;
-    background-color: rgb(199, 134, 14);
+    background-color: #2c2825;
     color: #E5E7E9;
   }
 

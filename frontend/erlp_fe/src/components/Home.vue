@@ -37,6 +37,6 @@
 
     .home h1 {
         font-size: 50px;
-        color    : #2c0f04;
+        color    : #24304c;
     }
 </style>

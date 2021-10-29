@@ -4,8 +4,8 @@ from rest_framework.response                          import Response
 from rest_framework.permissions                       import IsAuthenticated
 from rest_framework_simplejwt.backends                import TokenBackend
 
-from authApp.models.statistics                 import Historico
-from authApp.serializers.statisticsSerializer  import StatisticsSerializer
+from authApp.models.statistics                        import Historico
+from authApp.serializers.statisticsSerializer         import StatisticsSerializer
 
 
 class VerRegistroView(generics.ListAPIView):
@@ -29,20 +29,56 @@ class CrearNuevoReporteView(generics.CreateAPIView):
     serializer_class = StatisticsSerializer
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, *args, **kwargs):
-        token        = request.META.get('HTTP_AUTHORIZATION')[7:]
+    def get_queryset(self):
+        token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
         tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
         valid_data   = tokenBackend.decode(token,verify=False)
         
-        if valid_data['user_id'] != request.data['user']:
+        if valid_data['user_id'] != self.kwargs['user']:
             stringResponse = {'detail':'Unauthorized Request'}
-            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED) 
+            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+        
+
 
         serializer = StatisticsSerializer(data=request.data['report_data'])
         serializer.is_valid(raise_exception=True)
         serializer.save() 
 
-        return Response("Se creó reporte exitosamente", status=status.HTTP_201_CREATED)          
+        return Response("Se creó reporte exitosamente", status=status.HTTP_201_CREATED)  
+
+class EliminarReporteView(generics.DestroyAPIView):   
+    serializer_class = StatisticsSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset            = Historico.objects.all()
+
+    def deliete(self, request, *args, **kwargs):
+        token        = request.META.get('HTTP_AUTHORIZATION')[7:]
+        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+        valid_data   = tokenBackend.decode(token,verify=False)
+        
+        if valid_data['user_id'] != kwargs['user']:
+            stringResponse = {'detail':'Unauthorized Request'}
+            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+        
+        return super().destroy(request, *args, **kwargs)
+
+
+class ActualizarReporteView(generics.UpdateAPIView):  
+    serializer_class = StatisticsSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset            = Historico.objects.all()
+
+    def update(self, request, *args, **kwargs):
+        token        = request.META.get('HTTP_AUTHORIZATION')[7:]
+        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+        valid_data   = tokenBackend.decode(token,verify=False)
+        
+        if valid_data['user_id'] != kwargs['user']:
+            stringResponse = {'detail':'Unauthorized Request'}
+            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+        
+        return super().update(request, *args, **kwargs)
+
 
 class HistoricoMuertesView(generics.ListAPIView):
     serializer_class = StatisticsSerializer
@@ -80,50 +116,8 @@ class HistoricoRiesgosPorDepartamentoView(generics.ListAPIView):
         return queryset  
 
 
-class ActualizarReporteView(generics.UpdateAPIView):  
-    serializer_class = StatisticsSerializer
-    permission_classes = (IsAuthenticated,)
-    queryset            = Historico.objects.all()
-
-    def put(self, request, *args, **kwargs):
-        token        = request.META.get('HTTP_AUTHORIZATION')[7:]
-        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
-        valid_data   = tokenBackend.decode(token,verify=False)
-        
-        if valid_data['user_id'] != kwargs['user']:
-            stringResponse = {'detail':'Unauthorized Request'}
-            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED) 
-        return super().update(request, *args, **kwargs)    
+  
 
 
-class EliminarReporteView(generics.DestroyAPIView):   
-    serializer_class = StatisticsSerializer
-    permission_classes = (IsAuthenticated,)
-    queryset            = Historico.objects.all()
-
-    def delete(self, request, *args, **kwargs):
-        token        = request.META.get('HTTP_AUTHORIZATION')[7:]
-        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
-        valid_data   = tokenBackend.decode(token,verify=False)
-        
-        if valid_data['user_id'] != kwargs['user']:
-            stringResponse = {'detail':'Unauthorized Request'}
-            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)  
-
-        return super().destroy(request, *args, **kwargs) 
 
 
-class verReporteView(generics.RetrieveAPIView):           
-    serializer_class = StatisticsSerializer
-    permission_classes = (IsAuthenticated,)
-    queryset            = Historico.objects.all()    
-
-    def get(self, request, *args, **kwargs):
-        token        = request.META.get('HTTP_AUTHORIZATION')[7:]
-        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
-        valid_data   = tokenBackend.decode(token,verify=False)
-        
-        if valid_data['user_id'] != kwargs['user']:
-            stringResponse = {'detail':'Unauthorized Request'}
-            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED) 
-        return super().get(request, *args, **kwargs)

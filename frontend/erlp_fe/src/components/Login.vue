@@ -63,7 +63,7 @@
     }
 
     .containerLoginUser {
-        border: 3px solid #2c0f04;
+        border: 3px solid #24304c;
         border-radius: 10px;
         width: 25%;
         height: 60%;
@@ -74,7 +74,7 @@
     }
 
     .loginUser h2{
-        color: #2c0f04;
+        color: #24304c;
     }
 
     .loginUser form{
@@ -87,14 +87,14 @@
         box-sizing: border-box;
         padding: 10px 20px;
         margin: 5px 0;
-        border: 1px solid #2c0f04;
+        border: 1px solid #24304c;
     }
 
     .loginUser button{
         width: 100%;
         height: 40px;
         color: #E5E7E9;
-        background: #2c0f04;
+        background: #24304c;
         border: 1px solid #E5E7E9;
         border-radius: 5px;
         padding: 10px 25px;
@@ -103,7 +103,7 @@
 
     .loginUser button:hover{
         color: #E5E7E9;
-        background: #744806;
+        background: #060874;
         border: 1px solid #283747;
     }
 </style>

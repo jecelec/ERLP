@@ -1,10 +1,13 @@
 <template>
   <div id="app" class="app">
     <div class="header">
-      <h1>ERLP</h1>
-      <h2>Estadística de riesgos laborales Positiva</h2>
+      <h2>ERLP Estadística de riesgos laborales Positiva</h2>
       <nav>
         <button v-if="isAuth" v-on:click="loadHome"> Inicio </button>
+        <button v-if="isAuth" v-on:click="loadCreate"> Crear registro </button>
+        <button v-if="isAuth" v-on:click="loadUpdate"> Modificar registro </button>
+        <button v-if="isAuth" v-on:click="loadView"> Buscar registro </button>
+        <button v-if="isAuth" v-on:click="loadDelete"> Eliminar registro </button>
         <button v-if="isAuth" v-on:click="logOut"> Cerrar Sesión </button>
 
         <button v-if="!isAuth" v-on:click="loadLogIn"> Iniciar Sesión </button>
@@ -55,6 +58,22 @@
       loadHome: function(){
         this.$router.push({name: "home"});
       },
+      
+      loadCreate: function(){
+        this.$router.push({name: "create"});
+      },
+      
+      loadDelete: function(){
+        this.$router.push({name: "delete"});
+      },
+      
+      loadUpdate: function(){
+        this.$router.push({name: "update"});
+      },
+      
+      loadView: function(){
+        this.$router.push({name: "view"});
+      },
 
       loadAccount: function(){
         this.$router.push({name: "account"});
@@ -102,11 +121,11 @@
 
   .header{
     margin: 0;
-    padding: 0;
+    padding: 15px;
     width: 100%;
     height: 10vh;
     min-height: 100px;
-    background-color: #2c2825 ;
+    background-color: #24304c ;
     color:#E5E7E9 ;
     display: flex;
     justify-content: space-between;
@@ -120,7 +139,7 @@
 
   .header nav {
     height: 100%;
-    width: 20%;
+    width: 40%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -129,21 +148,22 @@
 
   .header nav button{
     color: #E5E7E9;
-    background: #2c2825;
+    background: #24304c;
     border: 1px solid #E5E7E9;
     border-radius: 5px;
     padding: 10px 20px;
+    margin: 3px;
   }
 
   .header nav button:hover{
     color: #E5E7E9;
-    background: #744806;
+    background: #060874;
     border: 1px solid #E5E7E9;
   }
 
   .main-component{
-    height: 75vh;
-    margin: 0%;
+    height: 95%;
+    margin: 3%;
     padding: 0%;
     background: #FDFEFE ;
     align-content: center;
@@ -155,7 +175,7 @@
     width: 100%;
     height: 10vh;
     min-height: 100px;
-    background-color: #2c2825;
+    background-color: #24304c;
     color: #E5E7E9;
   }
 

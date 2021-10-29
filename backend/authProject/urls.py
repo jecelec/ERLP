@@ -15,6 +15,5 @@ urlpatterns = [
     path('statistics/departamentos/<int:user>/<str:departamento>/',   views.HistoricoRiesgosPorDepartamentoView.as_view()), 
     path('statistics/actualizar/<int:user>/<int:pk>/',                views.ActualizarReporteView.as_view()),
     path('statistics/eliminar/<int:user>/<int:pk>/',                  views.EliminarReporteView.as_view()),
-    path('statistics/reporte/<int:user>/<int:pk>/',                   views.verReporteView.as_view()),
 ]
 

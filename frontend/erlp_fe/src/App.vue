@@ -5,7 +5,6 @@
       <h2>Estadística de riesgos laborales Positiva</h2>
       <nav>
         <button v-if="isAuth" v-on:click="loadHome"> Inicio </button>
-        <button v-if="isAuth" v-on:click="loadAccount"> Cuenta </button>
         <button v-if="isAuth" v-on:click="logOut"> Cerrar Sesión </button>
 
         <button v-if="!isAuth" v-on:click="loadLogIn"> Iniciar Sesión </button>

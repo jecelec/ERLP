@@ -1,2 +1,2 @@
 from .user       import User
-from .statistics import historico
+from .statistics import Historico

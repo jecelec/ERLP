@@ -1,7 +1,7 @@
 from django.db import models
 from .user     import User
 
-class historico(models.Model):
+class Historico(models.Model):
     id                    = models.AutoField(primary_key=True)
     departamento          = models.CharField('departamento',  max_length = 56)
     municipio             = models.CharField('municipio',     max_length = 56)
